@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.io.*;
 import java.nio.ByteBuffer;  
 
@@ -75,7 +76,7 @@ public class TraceFile {
 				
 				// Address bits A0 and A1 are not stored in the trace as they are always 0.
 				//Hence the '<< 2'.
-				currentRecord.address 		= (currentWord & 0x007FFFFF) << 2;
+				currentRecord.address 		= (currentWord & 0x7FFFFF) << 2;
 				
 				/*--------------Word1-------------------*/
 				returnCode = inputStream.read(currentWordArray);
@@ -113,8 +114,8 @@ public class TraceFile {
 
 	
 //Simple function so that we can pull out records data.	
-public ArrayList<AddressRecord> getRecordsData(){
-	return addressRecords;
+public Iterator<AddressRecord> getRecordsData(){
+	return addressRecords.iterator();
 }
 	
 
